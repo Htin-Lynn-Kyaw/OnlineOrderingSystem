@@ -17,6 +17,6 @@ public class Address
     [StringLength(100)]
     public string Details { get; set; } = string.Empty;
 
-    public Restaurant Restaurant { get; set; }
-    public AppUser AppUser { get; set; }
+    //public Restaurant? Restaurant { get; set; }
+    public AppUser? AppUser { get; set; }
 }

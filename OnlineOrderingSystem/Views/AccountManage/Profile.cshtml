@@ -1,19 +1,41 @@
-﻿@model VMProfile
+﻿@model OnlineOrderingSystem.Models.ViewModels.VMProfile
 
 <div class="row">
     <div class="col-lg-6 mx-auto rounded border p-4">
         <section>
             <h2 class="text-center">Log In</h2>
+@*             @if (!string.IsNullOrEmpty(ViewBag.SuccessMessage))
+            {
+                <div class="alert alert-success">
+                    @Html.Raw(ViewBag.SuccessMessage)
+                </div>
+            } *@
             <hr />
-            <div class="text-danger" role="alert">@Html.ValidationSummary(true, "", new { @class = "text-danger" })</div>
-            <form id="loginForm" action="/CustomAccount/CustomLogin" method="post">
+            @* <div class="text-danger" role="alert">@Html.ValidationSummary(true, "", new { @class = "text-danger" })</div> *@
+            <form id="loginForm" asp-controller="AccountManage" asp-action="AddProfile" method="post">
                 <div class="form-floating mb-3">
-                    <input type="email" id="email" name="email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" required>
-                    <label for="email" class="form-label">Email</label>
+                    <input type="text" asp-for="Nickname" id="Nickname" name="Nickname" class="form-control" autocomplete="username" aria-required="true" placeholder="john" required>
+                    <label for="Nickname" class="form-label">Nickname</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" asp-for="City" id="City" name="City" class="form-control" autocomplete="city" aria-required="true" placeholder="Yangon" required>
+                    <label for="City" class="form-label">City</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" asp-for="Township" id="Township" name="Township" class="form-control" autocomplete="township" aria-required="true" placeholder="Tamwe" required>
+                    <label for="Township" class="form-label">Township</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" asp-for="Street" id="Street" name="Street" class="form-control" autocomplete="street" aria-required="true" placeholder="Saint Paul St." required>
+                    <label for="Street" class="form-label">Street</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <textarea id="Details" asp-for="Details" name="Details" class="form-control" autocomplete="street" aria-required="true" placeholder="Saint Paul St." required></textarea>
+                    <label for="Details" class="form-label">Details</label>
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
+                        <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
                     </div>
                     <div class="col-6">
                         <a class="w-100 btn btn-lg btn-outline-primary" href="/" role="button">Cancel</a>
@@ -23,3 +45,14 @@
         </section>
     </div>
 </div>
+@section scripts {
+    
+        @if (!string.IsNullOrEmpty(ViewBag.SuccessMessage))
+        {
+            <script>
+                Notiflix.Notify.success('@ViewBag.SuccessMessage');
+            </script>
+        }
+    
+}
+

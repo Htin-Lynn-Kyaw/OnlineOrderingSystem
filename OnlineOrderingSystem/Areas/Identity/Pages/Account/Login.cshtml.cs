@@ -112,7 +112,6 @@ namespace OnlineOrderingSystem.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-
                 AppUser appUser = await _userManager.FindByEmailAsync(Input.Email);
                 if (appUser is not null && appUser.IsActive)
                 {
@@ -141,7 +140,9 @@ namespace OnlineOrderingSystem.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, appUser.Email + " is unavailable right now.");
+                    string message = appUser is null ? Input.Email + " does not exist." 
+                                                     : appUser.Email.Trim() + " is unavailable right now.";
+                    ModelState.AddModelError(string.Empty, message);
                     return Page();
                 }
             }

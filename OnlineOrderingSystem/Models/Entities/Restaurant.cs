@@ -18,11 +18,13 @@ public class Restaurant
     public string OpeningHour { get; set; } = string.Empty;
     [StringLength(50)]
     public string ClosingHour { get; set; } = string.Empty;
-    public ICollection<Category> Categories { get; set; } = new List<Category>();
+    public ICollection<Category> Categories { get; set; }
 
+    [StringLength(200)]
+    public string Location { get; set; }
     //public ICollection<Order> Orders { get; set; } = new List<Order>();
 
-    public Guid AddressID { get; set; }
-    [ForeignKey("AddressID")]
-    public Address? Address { get; set; }
+    //public Guid? AddressID { get; set; }
+    //[ForeignKey("AddressID")]
+    //public Address? Address { get; set; }
 }

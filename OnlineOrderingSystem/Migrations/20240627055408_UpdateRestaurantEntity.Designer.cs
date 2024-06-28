@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineOrderingSystem.Database;
 
@@ -11,9 +12,11 @@ using OnlineOrderingSystem.Database;
 namespace OnlineOrderingSystem.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240627055408_UpdateRestaurantEntity")]
+    partial class UpdateRestaurantEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,13 +46,13 @@ namespace OnlineOrderingSystem.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "439cb04c-0199-4389-ba52-10f8bb6b6e62",
+                            Id = "f3d4959b-95a6-4592-8ed0-23efbe5c4975",
                             Name = "admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "56e7566a-1a4c-40f7-82b9-ece20ced39a1",
+                            Id = "626e7a24-ff07-4fda-9abe-d28e700eb2e9",
                             Name = "client",
                             NormalizedName = "Client"
                         });
@@ -414,15 +417,13 @@ namespace OnlineOrderingSystem.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("AddressID")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("ClosingHour")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Location")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("OpeningHour")
                         .IsRequired()
@@ -508,7 +509,15 @@ namespace OnlineOrderingSystem.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("OnlineOrderingSystem.Models.Entities.Restaurant", "Restaurant")
+                        .WithOne("Address")
+                        .HasForeignKey("OnlineOrderingSystem.Models.Entities.Address", "AddressID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("AppUser");
+
+                    b.Navigation("Restaurant");
                 });
 
             modelBuilder.Entity("OnlineOrderingSystem.Models.Entities.Category", b =>
@@ -588,6 +597,8 @@ namespace OnlineOrderingSystem.Migrations
 
             modelBuilder.Entity("OnlineOrderingSystem.Models.Entities.Restaurant", b =>
                 {
+                    b.Navigation("Address");
+
                     b.Navigation("Categories");
                 });
 #pragma warning restore 612, 618

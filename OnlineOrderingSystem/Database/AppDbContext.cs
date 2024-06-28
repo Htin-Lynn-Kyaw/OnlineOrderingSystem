@@ -33,10 +33,10 @@ public class AppDbContext : IdentityDbContext<AppUser, IdentityRole<Guid>, Guid>
 
         builder.Entity<IdentityRole>().HasData(admin, client);
 
-        builder.Entity<Restaurant>()
-            .HasOne(r => r.Address)
-            .WithOne(a => a.Restaurant)
-            .HasForeignKey<Address>(a => a.AddressID);
+        //builder.Entity<Restaurant>()
+        //    .HasOne(r => r.Address)
+        //    .WithOne(a => a.Restaurant)
+        //    .HasForeignKey<Address>(a => a.AddressID);
         //.OnDelete(DeleteBehavior.Cascade);
 
         builder.Entity<AppUser>()
