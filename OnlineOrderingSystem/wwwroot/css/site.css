@@ -17,6 +17,33 @@ html {
   min-height: 100%;
 }
 
-body {
-  margin-bottom: 60px;
+/* Show the parent dropdown menu on hover */
+/* Show the parent dropdown menu on hover */
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* Ensure the sub-dropdown (Roles) opens on hover and to the left */
+.dropdown-menu .dropdown:hover .dropdown-menu {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: -100%;
+    margin-top: -1px;
+}
+
+/* Override Bootstrap dropstart behavior */
+.dropdown-menu .dropstart .dropdown-menu {
+    right: 100%;
+    left: auto;
+}
+
+/* Prevent the sub-dropdown from displaying when hovering over parent */
+.nav-item.dropdown .dropdown-menu .dropdown-menu {
+    display: none;
+}
+
+/* Display the sub-dropdown when hovering over the sub-dropdown item */
+.nav-item.dropdown .dropdown-menu .dropdown:hover .dropdown-menu {
+    display: block;
 }

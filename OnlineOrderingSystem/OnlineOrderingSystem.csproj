@@ -19,4 +19,12 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.12" />
   </ItemGroup>
 
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Shared\_AdminLayout.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Shared\_AdminLayout.cshtml" />
+  </ItemGroup>
+
 </Project>

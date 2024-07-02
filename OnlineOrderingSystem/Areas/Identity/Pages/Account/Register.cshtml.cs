@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using OnlineOrderingSystem.Models.Entities;
+using OnlineOrderingSystem.Utilities;
 
 namespace OnlineOrderingSystem.Areas.Identity.Pages.Account
 {
@@ -123,6 +124,7 @@ namespace OnlineOrderingSystem.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
+                    
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);
@@ -136,6 +138,8 @@ namespace OnlineOrderingSystem.Areas.Identity.Pages.Account
 
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+                    await _userManager.AddToRoleAsync(user, SystemsRoles.CLIENT);
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {

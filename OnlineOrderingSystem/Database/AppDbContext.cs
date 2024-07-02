@@ -22,16 +22,32 @@ public class AppDbContext : IdentityDbContext<AppUser, IdentityRole<Guid>, Guid>
     {
         base.OnModelCreating(builder);
 
-        var admin = new IdentityRole("admin");
-        admin.NormalizedName = "Admin";
+        var adminRole = new IdentityRole<Guid>
+        {
+            Id = Guid.NewGuid(),
+            Name = "admin",
+            NormalizedName = "ADMIN"
+        };
 
-        var client = new IdentityRole("client");
-        client.NormalizedName = "Client";
+        var clientRole = new IdentityRole<Guid>
+        {
+            Id = Guid.NewGuid(),
+            Name = "client",
+            NormalizedName = "CLIENT"
+        };
 
-        //var seller = new IdentityRole("seller");
-        //seller.NormalizedName = "Seller";
+        builder.Entity<IdentityRole<Guid>>().HasData(adminRole, clientRole);
 
-        builder.Entity<IdentityRole>().HasData(admin, client);
+        //var admin = new IdentityRole("admin");
+        //admin.NormalizedName = "Admin";
+
+        //var client = new IdentityRole("client");
+        //client.NormalizedName = "Client";
+
+        ////var seller = new IdentityRole("seller");
+        ////seller.NormalizedName = "Seller";
+
+        //builder.Entity<IdentityRole>().HasData(admin, client);
 
         //builder.Entity<Restaurant>()
         //    .HasOne(r => r.Address)
